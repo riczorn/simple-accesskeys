@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<name>plg_system_simpleaccesskeys</name>
+	<author>Riccardo Zorn</author>
+	<creationDate>Jan 2018</creationDate>
+	<copyright>Copyright (C) 2018 Riccardo Zorn</copyright>
+	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<authorEmail>support@fasterjoomla.com</authorEmail>
+	<authorUrl>www.fasterjoomla.com</authorUrl>
+	<version>1.4.0</version>
+	<description>PLG_SYSTEM_SIMPLEACCESSKEYS_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="simpleaccesskeys">simpleaccesskeys.php</filename>
+		<filename>index.html</filename>
+		<filename>README.php</filename>
+		<folder>assets</folder>
+		<folder>language</folder>		
+	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="debug" type="radio" default="1"
+					label="PLG_SYSTEM_SIMPLEACCESSKEYS_DEBUG" description="PLG_SYSTEM_SIMPLEACCESSKEYS_DEBUG_DESC"
+					class="btn-group btn-group-yesno" 
+					filter="integer">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+					<field name="selector"  label="PLG_SYSTEM_SIMPLEACCESSKEYS_SELECTOR" description="PLG_SYSTEM_SIMPLEACCESSKEYS_SELECTOR_DESC" type="text" default="ul li a" filter="RAW" />
+					<field name="exclusion" label="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUSION" description="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUSION_DESC" type="text" default="INPUT TEXTAREA" filter="RAW" />
+					<field name="reserved" label="PLG_SYSTEM_SIMPLEACCESSKEYS_RESERVED" description="PLG_SYSTEM_SIMPLEACCESSKEYS_RESERVED_DESC" type="text" default="" filter="RAW" />
+					<field name="forced" label="PLG_SYSTEM_SIMPLEACCESSKEYS_FORCED" description="PLG_SYSTEM_SIMPLEACCESSKEYS_FORCED_DESC" type="textarea" cols="80" rows="3" default="Home=h" filter="RAW" />
+					<field name="decoration" label="PLG_SYSTEM_SIMPLEACCESSKEYS_DECORATION" description="PLG_SYSTEM_SIMPLEACCESSKEYS_DECORATION_DESC" type="text" default="&lt;em class=&quot;accesskey&quot;&gt;%s&lt;/em&gt;" filter="RAW" />
+					<field name="showlegend" class="btn-group btn-group-yesno" label="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWLEGEND" description="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWLEGEND_DESC" type="radio" default="1" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+					</field>
+					<field name="legendselector" label="PLG_SYSTEM_SIMPLEACCESSKEYS_LEGENDSELECTOR" description="PLG_SYSTEM_SIMPLEACCESSKEYS_LEGENDSELECTOR_DESC" type="text" default="" filter="RAW" />
+					<field name="aspacer001" label="PLG_SYSTEM_SIMPLEACCESSKEYS_TRANSLATE_NOTICE" description="PLG_SYSTEM_SIMPLEACCESSKEYS_TRANSLATE_NOTICE_DESC" type="spacer"  />
+					<field name="include_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS_DESC" type="text" default="" filter="text" />
+					<field name="exclude_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS_DESC" type="text" default="" filter="text" />
+					
+					<field name="loadcss" class="btn-group btn-group-yesno" label="PLG_SYSTEM_SIMPLEACCESSKEYS_LOADCSS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_LOADCSS_DESC" type="radio" default="1" >
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+					</field>
+					<field name="showcopyright" class="btn-group btn-group-yesno" label="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWCOPYRIGHT" description="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWCOPYRIGHT_DESC" type="radio" default="1" >
+					<option value="1" class="copy">JYES</option><option value="0" class="copy">JNO</option>
+					</field>
+			</fieldset>
+			
+		</fields>
+	</config>
+	<updateservers>
+    	<server type="extension" priority="1"
+       		name="SimpleAccessKeys Update Site"><![CDATA[https://www.fasterjoomla.com/index.php?option=com_ars&view=update&task=stream&format=xml&id=7&dummy=plg_simpleaccesskeys.xml]]></server>
+	</updateservers>
+</extension>

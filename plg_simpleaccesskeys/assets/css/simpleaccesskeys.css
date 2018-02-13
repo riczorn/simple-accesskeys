@@ -1,0 +1,60 @@
+/**
+ * System Plugin SimpleAccessKeys adds access keys for accessibility
+ * to the menu items to provide keyboard navigation
+ * 
+ * @author Riccardo Zorn code@fasterjoomla.com
+ * @copyright (C) 2018 http://www.fasterjoomla.com
+ * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
+ * @author Riccardo Zorn code@fasterjoomla.com
+ */
+
+
+/* 
+  *  You can prevent loading this file in the 
+  *  SimpleAccessKeys plugin configuration 
+  */
+
+div.accessKeyPopup {
+    background-color: rgba(255, 255, 255, 1);
+    color: #302070;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: scroll;
+    padding: 3rem;
+    z-index: 10010;
+}
+
+div.accessKeyPopup span.simpleaccesskeyslogo {
+    background-image: url(../images/simpleaccesskeys_logo.png);
+    background-size: contain;
+    float: left;
+    width: 6rem;
+    height: 6rem;
+    margin-right: 3rem;
+}
+
+div.accessKeyPopup ul {
+    clear: both;
+    list-style-type: none;
+}
+
+div.accessKeyPopup ul span.key {
+    font-weight: bold;
+    width: 2rem;
+    display: inline-block;
+}
+
+.accessKeyLegend {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #302070;
+    position: fixed;
+    padding: 0.3rem 1rem;
+    border-radius: 1.1rem;
+    border: 3px solid #231258;
+    right: 1em;
+    top: 1em;
+    z-index: 10000;
+}
