@@ -98,10 +98,10 @@ class plgSystemSimpleAccessKeys extends JPlugin
 		// always enable.
 		$result = true;
 			
-		if (!is_null($Itemid)) {
+		if (strlen($Itemid)>0) {
 			//error_log( "include_itemids:$include_itemids, exclude_itemids: $exclude_itemids, Itemid:$Itemid<br>;");
 			// if I set include Itemids, they must match:
-			if (!is_null($include_itemids)) {
+			if (strlen($include_itemids)>0) {
 				$result = false;
 				if (in_array($Itemid, explode(',',$include_itemids))) {
 					$result = true;
@@ -109,7 +109,7 @@ class plgSystemSimpleAccessKeys extends JPlugin
 			}
 
 			// if I have configured exclusions, they must match to disable:
-			if (!is_null($exclude_itemids)) {
+			if (strlen($exclude_itemids)>0) {
 				//$result = true;
 				if (in_array($Itemid, explode(',',$exclude_itemids))) {
 					$result = false;

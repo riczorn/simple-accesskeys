@@ -7,7 +7,7 @@
 	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
 	<authorEmail>support@fasterjoomla.com</authorEmail>
 	<authorUrl>www.fasterjoomla.com</authorUrl>
-	<version>1.4.0</version>
+	<version>1.4.2</version>
 	<description>PLG_SYSTEM_SIMPLEACCESSKEYS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="simpleaccesskeys">simpleaccesskeys.php</filename>
@@ -46,7 +46,7 @@
 					<option value="1">JYES</option>
 					</field>
 					<field name="showcopyright" class="btn-group btn-group-yesno" label="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWCOPYRIGHT" description="PLG_SYSTEM_SIMPLEACCESSKEYS_SHOWCOPYRIGHT_DESC" type="radio" default="1" >
-					<option value="1" class="copy">JYES</option><option value="0" class="copy">JNO</option>
+					<option value="1" class="copy">JYES</option>
 					</field>
 			</fieldset>
 			
