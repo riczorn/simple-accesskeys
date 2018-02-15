@@ -64,3 +64,7 @@ Version 1.4.0
 Version 1.4.1 (2018/01/31)
 	Added links on the popup/list page;
 	Only allow letters and numbers for access keys;
+
+Version 1.5.0 (2018/02/15)
+	Added Joomla 4 compatibility
+	
