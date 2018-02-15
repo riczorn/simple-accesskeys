@@ -154,7 +154,7 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
 /**
  * apply the decoration to the menu items
  */
-SimpleAccessKeys.prototype.decorateAccessKeys(urls) {
+SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
     if (this.config.decoration) {
         for (var i in urls) {
             var url = urls[i];
