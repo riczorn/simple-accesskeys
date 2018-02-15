@@ -21,13 +21,27 @@ div.accessKeyPopup {
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
+    bottom: 2rem;
     overflow: scroll;
     padding: 3rem;
     z-index: 10010;
 }
 
-div.accessKeyPopup span.simpleaccesskeyslogo {
+div.accessKeyPopup .sak-copyright {
+    background-color: #302070;
+    color: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    bottom: 0rem;
+    overflow: hidden;
+    padding: 0 3rem;
+    z-index: 10010;
+    text-align: right;
+}
+
+div.accessKeyPopup span.sak-logo {
     background-image: url(../images/simpleaccesskeys_logo.png);
     background-size: contain;
     float: left;
@@ -47,14 +61,19 @@ div.accessKeyPopup ul span.key {
     display: inline-block;
 }
 
+div.accessKeyPopup ul span.label {
+    display: inline-block;
+    max-width: calc( 100% - 3rem);
+}
+
 .accessKeyLegend {
     background-color: rgba(255, 255, 255, 0.8);
     color: #302070;
     position: fixed;
     padding: 0.3rem 1rem;
     border-radius: 1.1rem;
-    border: 3px solid #231258;
-    right: 1em;
-    top: 1em;
+    border: 0.2rem solid #231258;
+    right: 1rem;
+    top: 1rem;
     z-index: 10000;
 }

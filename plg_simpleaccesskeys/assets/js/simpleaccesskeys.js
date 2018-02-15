@@ -148,8 +148,13 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
             urls.splice(i, 1);
         }
     }
+    this.log(1, 'Access keys: ' + reservedAccessKeys.join(' '));
+}
 
-    // now apply the decoration to the menu items
+/**
+ * apply the decoration to the menu items
+ */
+SimpleAccessKeys.prototype.decorateAccessKeys(urls) {
     if (this.config.decoration) {
         for (var i in urls) {
             var url = urls[i];
@@ -164,23 +169,25 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
             decoratedKeyU = this.config.decoration.replace('%s', accessKey.toUpperCase());
             decoratedKeyL = this.config.decoration.replace('%s', accessKey);
 
-            var markup = jQuery(url.item).html();
-            //log(0,'Decorating key ' + accessKey + ' with ',decoratedKeyU);
-            var markupU = markup.replace(
+            var decoratedText = text.replace(
                 accessKey.toUpperCase(),
                 decoratedKeyU);
-            if (markupU == markup) {
-                markupU = markup.replace(
+            if (text == decoratedText) {
+                decoratedKeyU = text.replace(
                     accessKey,
                     decoratedKeyL);
             }
+
+            var markup = jQuery(url.item).html();
+            //log(0,'Decorating key ' + accessKey + ' with ',decoratedKeyU);
+            var markupU = markup.replace(
+                text,
+                decoratedText);
+
             jQuery(url.item).html(markupU);
 
         }
     }
-
-    this.log(1, 'Access keys: ' + reservedAccessKeys.join(' '));
-
 }
 
 /**
@@ -214,24 +221,28 @@ SimpleAccessKeys.prototype.loadSAKLegendButton = function() {
 SimpleAccessKeys.prototype.showSAKPopup = function(self) {
     // add additional styles here if necessary:
     var popupStyle = {
-
+        "display": "flex",
+        "flex-direction": "column"
     };
 
-    var popupText = "<h1>" + self.config.legendTitle + "</h1>" +
-        "<p><span class='simpleaccesskeyslogo'></span>" +
-        self.config.legendSubTitle +
-        self.config.copyright +
-        "</p><ul>";
+    var popupText = new Array(
+        '<div class="accessKeyPopup">',
+        "<h1>" + self.config.legendTitle + "</h1>",
+        "<p><span class='sak-logo-disabled'></span>",
+        self.config.legendSubTitle,
+        "</p><ul>");
     for (var i in self.config.urls) {
         var url = self.config.urls[i];
         var href = jQuery(url.item).attr("href");
         if (href) {
-            popupText += "<li><a class='saklink' href='" + href + "'><span class='key'>" + url.accessKey + "</span>&nbsp;" + url.text + "</a></li>";
+            popupText.push("<li><a class='sak-link' href='" + href + "'><span class='key'>" + url.accessKey + "</span>&nbsp;<span class='label'>" + url.text + "</span></a></li>");
         }
     }
-    popupText += "</ul>";
+    popupText.push("</ul>");
+    popupText.push("<div class='sak-copyright'>" + self.config.copyright + "</div>");
+    popupText.push("</div>");
 
-    var sakPOPUP = jQuery('<div class="accessKeyPopup">' + popupText + '</div>')
+    var sakPOPUP = jQuery(popupText.join(''))
         .css(popupStyle).click(function() {
             sakPOPUP.remove();
         }).appendTo(jQuery('body'));

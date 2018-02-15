@@ -67,4 +67,3 @@ Version 1.4.1 (2018/01/31)
 
 Version 1.5.0 (2018/02/15)
 	Added Joomla 4 compatibility
-	
