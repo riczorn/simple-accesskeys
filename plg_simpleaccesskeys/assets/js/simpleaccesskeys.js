@@ -69,6 +69,7 @@ SimpleAccessKeys.prototype.load = function() {
     });
 
     self.assignAccessKeys(urls);
+    self.decorateAccessKeys(urls);
 
     self.log(0, 'Access Keys Assigned', urls);
     self.config.urls = urls;
@@ -152,7 +153,11 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
 }
 
 /**
- * apply the decoration to the menu items
+ * apply the decoration to the menu items, i.e.
+ * <a href="?id=3">Aristocratic bitch</a>
+ * becomes
+ * <a href="?id=3"><em>A</em>ristocratic bitch</a>
+ * Decoration pattern is set in the plugin config.
  */
 SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
     if (this.config.decoration) {
@@ -177,12 +182,13 @@ SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
                     accessKey,
                     decoratedKeyL);
             }
-
+            // console.log('text', text, 'decText', decoratedText);
             var markup = jQuery(url.item).html();
-            //log(0,'Decorating key ' + accessKey + ' with ',decoratedKeyU);
+            // log(0,'Decorating key ' + accessKey + ' with ',decoratedKeyU);
             var markupU = markup.replace(
                 text,
                 decoratedText);
+            // console.log('markup', markup, 'markupU', markupU);
 
             jQuery(url.item).html(markupU);
 
