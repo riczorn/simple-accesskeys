@@ -37,8 +37,7 @@ div.accessKeyPopup .sak-copyright {
     bottom: 0rem;
     overflow: hidden;
     padding: 0 3rem;
-    z-index: 10010;
-    text-align: right;
+    z-index: 100100;
 }
 
 div.accessKeyPopup span.sak-logo {
@@ -77,3 +76,5 @@ div.accessKeyPopup ul span.label {
     top: 1rem;
     z-index: 10000;
 }
+
+Version 1.5.1 (2018/)
