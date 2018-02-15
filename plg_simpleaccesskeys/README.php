@@ -67,6 +67,6 @@ Version 1.4.1 (2018/01/31)
 
 Version 1.5.0 (2018/02/15)
 	Added Joomla 4 compatibility
-Version 1.5.1 (2018/02/15)
-	Compatibility improvement
 	
+Version 1.5.1 (2018/02/15)
+    Improved the algorithm for highlighting the letters in the menu
