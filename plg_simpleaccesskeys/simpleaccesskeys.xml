@@ -7,7 +7,7 @@
 	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
 	<authorEmail>support@fasterjoomla.com</authorEmail>
 	<authorUrl>www.fasterjoomla.com</authorUrl>
-	<version>1.5.1</version>
+	<version>1.5.2</version>
 	<description>PLG_SYSTEM_SIMPLEACCESSKEYS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="simpleaccesskeys">simpleaccesskeys.php</filename>
@@ -54,6 +54,6 @@
 	</config>
 	<updateservers>
     	<server type="extension" priority="1"
-       		name="SimpleAccessKeys Update Site"><![CDATA[https://www.fasterjoomla.com/index.php?option=com_ars&view=update&task=stream&format=xml&id=7&dummy=plg_simpleaccesskeys.xml]]></server>
+       		name="SimpleAccessKeys Update Site"><![CDATA[https://www.fasterjoomla.com/index.php?option=com_ars&view=update&task=stream&format=xml&id=7&dummy=simpleaccesskeys.xml]]></server>
 	</updateservers>
 </extension>
