@@ -31,10 +31,10 @@ var SimpleAccessKeys = function(config) {
  * @param item
  * @returns
  */
-SimpleAccessKeys.prototype.log = function(level, message, item) {
-    if (level || this.config.debug) {
+SimpleAccessKeys.prototype.log = function(level, message, item, item2, item3) {
+    if (level > 1 || this.config.debug) {
         if (item) {
-            console.log(message, item);
+            console.log(message, item, item2, item3);
         } else {
             console.log(message);
         }
@@ -54,7 +54,7 @@ SimpleAccessKeys.prototype.load = function() {
     self.log(0, '  found ', $menus.length, 'items');
 
     jQuery.each($menus, function(index, item) {
-        self.log(0, 'examine', item);
+        // self.log(0, 'examine', item);
         var text = jQuery(item).text();
         text = text.trim ? text.trim() : text;
         var href = jQuery(item).attr("href");
@@ -145,7 +145,7 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
     // finally remove items with no accessKey
     for (var i = urls.length - 1; i > 0; i--) {
         if (urls[i].accessKey === '') {
-            this.log(0, 'deleting empty url', urls[i]);
+            // this.log(0, 'deleting empty url', urls[i]);
             urls.splice(i, 1);
         }
     }
@@ -160,9 +160,11 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
  * Decoration pattern is set in the plugin config.
  */
 SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
+    var self = this;
     if (this.config.decoration) {
         for (var i in urls) {
             var url = urls[i];
+
             var text = url.text;
             var accessKey = url.accessKey;
             if (!accessKey) {
@@ -182,13 +184,27 @@ SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
                     accessKey,
                     decoratedKeyL);
             }
-            // console.log('text', text, 'decText', decoratedText);
             var markup = jQuery(url.item).html();
-            // log(0,'Decorating key ' + accessKey + ' with ',decoratedKeyU);
+            // self.log(0, 'Decorating markup:' + markup + ' with key ' +
+            //     accessKey + ' with ', decoratedKeyU);
+
+
+            // markup could be: 
+            // <img src="/images/wiki.jpg" alt="Download"><span class="image-title">Download</span>
+            // this helps prevent things like:
+            // error: <img src=\"/images/wiki.jpg\" alt=\"<em class=\" accesskey\"=\"\">Download\"&gt;<span class=\"image-title\">Download</span>
             var markupU = markup.replace(
-                text,
-                decoratedText);
-            // console.log('markup', markup, 'markupU', markupU);
+                text + '<',
+                decoratedText + '<');
+
+            // then fallback: it will break if the text is present in the attributes such as alt or url:
+            if (markupU == markup) {
+                //     self.log(0, 'rollback ');
+                markupU = markup.replace(
+                    text,
+                    decoratedText);
+            }
+            // self.log(0, 'markup', markup, 'markupU', markupU);
 
             jQuery(url.item).html(markupU);
 
@@ -244,6 +260,7 @@ SimpleAccessKeys.prototype.showSAKPopup = function(self) {
             popupText.push("<li><a class='sak-link' href='" + href + "'><span class='key'>" + url.accessKey + "</span>&nbsp;<span class='label'>" + url.text + "</span></a></li>");
         }
     }
+
     popupText.push("</ul>");
     popupText.push("<div class='sak-copyright'>" + self.config.copyright + "</div>");
     popupText.push("</div>");
