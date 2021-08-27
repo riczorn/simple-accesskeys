@@ -4,7 +4,7 @@
  * to the menu items to provide keyboard navigation
  *
  * @author Riccardo Zorn code@fasterjoomla.com
- * @copyright (C) 2018 http://www.fasterjoomla.com
+ * @copyright (C) 2018 https://www.fasterjoomla.com
  * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
  * @author Riccardo Zorn code@fasterjoomla.com
  */

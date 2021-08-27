@@ -4,7 +4,7 @@
  * to the menu items to provide keyboard navigation
  *
  * @author Riccardo Zorn code@fasterjoomla.com
- * @copyright (C) 2018 http://www.fasterjoomla.com
+ * @copyright (C) 2018 https://www.fasterjoomla.com
  * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
  * @author      Riccardo Zorn <code@fasterjoomla.com> - https://www.fasterjoomla.com/
  */
@@ -69,9 +69,9 @@ Version 1.5.0 (2018/02/15)
 	Added Joomla 4 compatibility
 	
 Version 1.5.1 (2018/02/15)
-		Improved the algorithm for highlighting the letters in the menu
+	Improved the algorithm for highlighting the letters in the menu
 		
 Version 1.5.2 (2018/09/02)
-		Support for images and fancier markup in the menu title
+	Support for images and fancier markup in the menu title
 		especially targeting the case where the url contains the text, now only replacing
 		the text.

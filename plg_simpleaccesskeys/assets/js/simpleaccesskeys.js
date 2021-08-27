@@ -3,7 +3,7 @@
  * to the menu items to provide keyboard navigation
  *
  * @author Riccardo Zorn code@fasterjoomla.com
- * @copyright (C) 2018 http://www.fasterjoomla.com
+ * @copyright (C) 2018 https://www.fasterjoomla.com
  * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
  * @author Riccardo Zorn code@fasterjoomla.com
  */
@@ -15,7 +15,7 @@
  */
 
 ;
-var SimpleAccessKeys = function(config) {
+var SimpleAccessKeys = function (config) {
     this.config = config;
     this.load();
     if (this.config.showLegend) {
@@ -31,7 +31,7 @@ var SimpleAccessKeys = function(config) {
  * @param item
  * @returns
  */
-SimpleAccessKeys.prototype.log = function(level, message, item, item2, item3) {
+SimpleAccessKeys.prototype.log = function (level, message, item, item2, item3) {
     if (level > 1 || this.config.debug) {
         if (item) {
             console.log(message, item, item2, item3);
@@ -45,7 +45,7 @@ SimpleAccessKeys.prototype.log = function(level, message, item, item2, item3) {
  * Find menu items, assign keys, return structure with all data
  * @returns
  */
-SimpleAccessKeys.prototype.load = function() {
+SimpleAccessKeys.prototype.load = function () {
     var self = this;
     self.log(0, 'SimpleAccessKeys initialising. Configuration');
     self.log(0, self.config);
@@ -53,7 +53,7 @@ SimpleAccessKeys.prototype.load = function() {
     var $menus = jQuery(self.config.selector);
     self.log(0, '  found ', $menus.length, 'items');
 
-    jQuery.each($menus, function(index, item) {
+    jQuery.each($menus, function (index, item) {
         // self.log(0, 'examine', item);
         var text = jQuery(item).text();
         text = text.trim ? text.trim() : text;
@@ -73,7 +73,7 @@ SimpleAccessKeys.prototype.load = function() {
 
     self.log(0, 'Access Keys Assigned', urls);
     self.config.urls = urls;
-    jQuery(document).keydown(function(event) {
+    jQuery(document).keydown(function (event) {
         var pressedChar = String.fromCharCode(event.which).toLowerCase();
         self.log(0, 'event: ' + pressedChar, event.target);
         if (self.config.exclusion.toUpperCase().indexOf(event.target.tagName.toUpperCase()) === -1) {
@@ -97,7 +97,7 @@ SimpleAccessKeys.prototype.load = function() {
  * @param urls
  * @returns
  */
-SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
+SimpleAccessKeys.prototype.assignAccessKeys = function (urls) {
     var reservedAccessKeys = new Array();
     /* the forced item contains a list of strings along 
      * with their associated key. Assigning them to the urls:
@@ -159,7 +159,7 @@ SimpleAccessKeys.prototype.assignAccessKeys = function(urls) {
  * <a href="?id=3"><em>A</em>ristocratic bitch</a>
  * Decoration pattern is set in the plugin config.
  */
-SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
+SimpleAccessKeys.prototype.decorateAccessKeys = function (urls) {
     var self = this;
     if (this.config.decoration) {
         for (var i in urls) {
@@ -216,7 +216,7 @@ SimpleAccessKeys.prototype.decorateAccessKeys = function(urls) {
  * Build the "Keys" button that will open the popup.
  * @returns
  */
-SimpleAccessKeys.prototype.loadSAKLegendButton = function() {
+SimpleAccessKeys.prototype.loadSAKLegendButton = function () {
     // add additional styles here if necessary:
     var self = this;
     var buttonStyle = {
@@ -228,9 +228,9 @@ SimpleAccessKeys.prototype.loadSAKLegendButton = function() {
     } else {
         button = jQuery('<a class="accessKeyLegend">' +
             self.config.legendButtonText +
-            '</a>').css(buttonStyle).click(function() {
-            self.showSAKPopup(self);
-        }).appendTo(jQuery('body'));
+            '</a>').css(buttonStyle).click(function () {
+                self.showSAKPopup(self);
+            }).appendTo(jQuery('body'));
     }
     self.log(0, 'SAK Button: ', button);
 
@@ -240,7 +240,7 @@ SimpleAccessKeys.prototype.loadSAKLegendButton = function() {
  * Show the popup with the map of the keys 
  * @returns
  */
-SimpleAccessKeys.prototype.showSAKPopup = function(self) {
+SimpleAccessKeys.prototype.showSAKPopup = function (self) {
     // add additional styles here if necessary:
     var popupStyle = {
         "display": "flex",
@@ -266,7 +266,7 @@ SimpleAccessKeys.prototype.showSAKPopup = function(self) {
     popupText.push("</div>");
 
     var sakPOPUP = jQuery(popupText.join(''))
-        .css(popupStyle).click(function() {
+        .css(popupStyle).click(function () {
             sakPOPUP.remove();
         }).appendTo(jQuery('body'));
 };
