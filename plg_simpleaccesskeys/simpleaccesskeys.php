@@ -91,32 +91,35 @@ class plgSystemSimpleAccessKeys extends JPlugin
 	    if (JPATH_BASE == JPATH_ADMINISTRATOR) {
 	        return false;
 		}
-		$include_itemids = $this->params->get('include_itemids','');
-		$exclude_itemids = $this->params->get('exclude_itemids','');
+		$include_itemids = $this->params->get('include_itemids');
+		$exclude_itemids = $this->params->get('exclude_itemids');
 		$Itemid = JFactory::getApplication()->input->get('Itemid','');
 
 		// always enable.
 		$result = true;
 			
 		if (strlen($Itemid)>0) {
-			//error_log( "include_itemids:$include_itemids, exclude_itemids: $exclude_itemids, Itemid:$Itemid<br>;");
+			error_log( "include_itemids:$include_itemids<br>;");
 			// if I set include Itemids, they must match:
-			if (strlen($include_itemids)>0) {
+
+
+
+			if (count($include_itemids)>0) {
 				$result = false;
-				if (in_array($Itemid, explode(',',$include_itemids))) {
+				if (in_array($Itemid, $include_itemids)) {
 					$result = true;
 				}
 			}
 
 			// if I have configured exclusions, they must match to disable:
-			if (strlen($exclude_itemids)>0) {
+			if (count($exclude_itemids)>0) {
 				//$result = true;
-				if (in_array($Itemid, explode(',',$exclude_itemids))) {
+				if (in_array($Itemid, $exclude_itemids)) {
 					$result = false;
 				}
 			}
 		}
-		//if ($result) {error_log( "SimpleAccessKeys enabled");} else {error_log( "SimpleAccessKeys disabled");}
+		if ($result) {error_log( "SimpleAccessKeys enabled");} else {error_log( "SimpleAccessKeys disabled");}
 		
 	    return $result;
 	}

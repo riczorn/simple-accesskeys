@@ -75,3 +75,8 @@ Version 1.5.2 (2018/09/02)
 	Support for images and fancier markup in the menu title
 		especially targeting the case where the url contains the text, now only replacing
 		the text.
+
+Version 1.5.3 (2021/08/20)
+	Compatibility with Joomla 3.10 and 4.0
+	Updated the Include / Exclude fields to menuitems.
+	

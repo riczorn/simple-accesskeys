@@ -6,16 +6,18 @@
 	<copyright>Copyright (C) 2018 Riccardo Zorn</copyright>
 	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
 	<authorEmail>support@fasterjoomla.com</authorEmail>
-	<authorUrl>www.fasterjoomla.com</authorUrl>
+	<authorUrl>https://www.fasterjoomla.com</authorUrl>
 	<version>1.5.3</version>
 	<description>PLG_SYSTEM_SIMPLEACCESSKEYS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="simpleaccesskeys">simpleaccesskeys.php</filename>
 		<filename>index.html</filename>
+		<filename>install.php</filename>
 		<filename>README.php</filename>
 		<folder>assets</folder>
 		<folder>language</folder>		
 	</files>
+	<scriptfile>install.php</scriptfile>
 
 	<config>
 		<fields name="params">
@@ -38,8 +40,12 @@
 					</field>
 					<field name="legendselector" label="PLG_SYSTEM_SIMPLEACCESSKEYS_LEGENDSELECTOR" description="PLG_SYSTEM_SIMPLEACCESSKEYS_LEGENDSELECTOR_DESC" type="text" default="" filter="RAW" />
 					<field name="aspacer001" label="PLG_SYSTEM_SIMPLEACCESSKEYS_TRANSLATE_NOTICE" description="PLG_SYSTEM_SIMPLEACCESSKEYS_TRANSLATE_NOTICE_DESC" type="spacer"  />
-					<field name="include_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS_DESC" type="menuitem" default="" filter="text" />
-					<field name="exclude_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS_DESC" type="menuitem" default="" filter="text" />
+					<field name="include_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS" 
+					description="PLG_SYSTEM_SIMPLEACCESSKEYS_INCLUDE_ITEMIDS_DESC" 
+					type="menuitem" multiple="multiple"  default="" filter="text" />
+					<field name="exclude_itemids" label="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS" 
+					description="PLG_SYSTEM_SIMPLEACCESSKEYS_EXCLUDE_ITEMIDS_DESC" 
+					type="menuitem" multiple="multiple"  default="" filter="text" />
 					
 					<field name="loadcss" class="btn-group btn-group-yesno" label="PLG_SYSTEM_SIMPLEACCESSKEYS_LOADCSS" description="PLG_SYSTEM_SIMPLEACCESSKEYS_LOADCSS_DESC" type="radio" default="1" >
 					<option value="0">JNO</option>
