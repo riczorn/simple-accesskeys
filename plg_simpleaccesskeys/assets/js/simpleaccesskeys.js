@@ -2,7 +2,6 @@
  * System Plugin SimpleAccessKeys adds access keys for accessibility
  * to the menu items to provide keyboard navigation
  *
- * @author Riccardo Zorn code@fasterjoomla.com
  * @copyright (C) 2018 https://www.fasterjoomla.com
  * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
  * @author Riccardo Zorn code@fasterjoomla.com
@@ -17,12 +16,14 @@
 ;
 var SimpleAccessKeys = function (config) {
     this.config = config;
+    this.sakPOPUP = null;
     this.load();
     if (this.config.showLegend) {
         this.loadSAKLegendButton();
     }
     return this;
 }
+
 
 /**
  * Conditionally log based on the debug setting
@@ -31,10 +32,10 @@ var SimpleAccessKeys = function (config) {
  * @param item
  * @returns
  */
-SimpleAccessKeys.prototype.log = function (level, message, item, item2, item3) {
+SimpleAccessKeys.prototype.log = function (level, message, ...item) {
     if (level > 1 || this.config.debug) {
         if (item) {
-            console.log(message, item, item2, item3);
+            console.log(message, ...item);
         } else {
             console.log(message);
         }
@@ -74,19 +75,67 @@ SimpleAccessKeys.prototype.load = function () {
     self.log(0, 'Access Keys Assigned', urls);
     self.config.urls = urls;
     jQuery(document).keydown(function (event) {
-        var pressedChar = String.fromCharCode(event.which).toLowerCase();
-        self.log(0, 'event: ' + pressedChar, event.target);
-        if (self.config.exclusion.toUpperCase().indexOf(event.target.tagName.toUpperCase()) === -1) {
-            for (var i in urls) {
-                url = urls[i];
-                if (url.accessKey == pressedChar) {
-                    self.log(1, 'Pressed key for ', url);
-                    url.item.click();
-                    break;
+        if (event.which == 27) {
+            self.toggleSAKPopup(self);
+        }
+        self.log(0, 'event: ' + event.which, event.altKey, event.shiftKey, event.ctrlKey);
+        if (!(event.altKey || event.shiftKey || event.ctrlKey)) {
+            var pressedChar = String.fromCharCode(event.which).toLowerCase();
+
+            if (self.config.exclusion.toUpperCase().indexOf(event.target.tagName.toUpperCase()) === -1) {
+                for (var i in urls) {
+                    url = urls[i];
+                    if (url.accessKey == pressedChar) {
+                        self.log(1, 'Pressed key for ', url);
+                        url.item.click();
+                        break;
+                    }
+                }
+            };
+        }
+    });
+
+    /**
+  * AddRule snap-in
+  *!
+     * jquery.addrule.js 0.0.2 - https://gist.github.com/yckart/5563717/
+     * Add css-rules to an existing stylesheet.
+     *
+     * @see http://stackoverflow.com/a/16507264/1250044
+     *
+     * Copyright (c) 2013 Yannick Albert (http://yckart.com)
+     * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php).
+     * 2013/11/23
+     **/
+    let $ = jQuery || Zepto;
+
+    window.addRule = function (selector, styles, sheet) {
+
+        styles = (function (styles) {
+            if (typeof styles === "string") return styles;
+            var clone = "";
+            for (var prop in styles) {
+                if (styles.hasOwnProperty(prop)) {
+                    var val = styles[prop];
+                    prop = prop.replace(/([A-Z])/g, "-$1").toLowerCase(); // convert to dash-case
+                    clone += prop + ":" + (prop === "content" ? '"' + val + '"' : val) + "; ";
                 }
             }
-        };
-    });
+            return clone;
+        }(styles));
+        sheet = sheet || document.styleSheets[document.styleSheets.length - 1];
+
+        if (sheet.insertRule) sheet.insertRule(selector + " {" + styles + "}", sheet.cssRules.length);
+        else if (sheet.addRule) sheet.addRule(selector, styles);
+
+        return this;
+
+    };
+
+    if ($) $.fn.addRule = function (styles, sheet) {
+        addRule(this.selector, styles, sheet);
+        return this;
+    };
 }
 
 /**
@@ -229,7 +278,7 @@ SimpleAccessKeys.prototype.loadSAKLegendButton = function () {
         button = jQuery('<a class="accessKeyLegend">' +
             self.config.legendButtonText +
             '</a>').css(buttonStyle).click(function () {
-                self.showSAKPopup(self);
+                self.toggleSAKPopup(self);
             }).appendTo(jQuery('body'));
     }
     self.log(0, 'SAK Button: ', button);
@@ -253,6 +302,8 @@ SimpleAccessKeys.prototype.showSAKPopup = function (self) {
         "<p><span class='sak-logo-disabled'></span>",
         self.config.legendSubTitle,
         "</p><ul>");
+
+    popupText.push("<li><a href='#' class='sak-link sak-esc'><span class='key'>ESC</span>&nbsp;<span class='label'>Toggle Menu</span></a></li>");
     for (var i in self.config.urls) {
         var url = self.config.urls[i];
         var href = jQuery(url.item).attr("href");
@@ -265,8 +316,43 @@ SimpleAccessKeys.prototype.showSAKPopup = function (self) {
     popupText.push("<div class='sak-copyright'>" + self.config.copyright + "</div>");
     popupText.push("</div>");
 
-    var sakPOPUP = jQuery(popupText.join(''))
+    self.sakPOPUP = jQuery(popupText.join(''))
         .css(popupStyle).click(function () {
-            sakPOPUP.remove();
+            //sakPOPUP.remove();
+            self.toggleSAKPopup(self);
         }).appendTo(jQuery('body'));
+    jQuery('.sak-link:focus').addRule({ border: '1px solid red', "border-radius": "5px" });
+    jQuery('.sak-link').addRule({ padding: '2px 5px' });
+    jQuery('.sak-link.sak-esc').click(() => { self.toggleSAKPopup(self); }).focus();
 };
+
+/**
+ * Show the popup with the map of the keys 
+ * @returns
+ */
+SimpleAccessKeys.prototype.toggleSAKPopup = function (self) {
+    // initial state:
+    let isVisible = false;
+    if (self.sakPOPUP) {
+        if (self.sakPOPUP.is(":visible")) {
+            isVisible = true;
+        }
+    }
+    if (self.sakPOPUP == null) {
+        self.showSAKPopup(self);
+    } else {
+        if (!isVisible) {
+            self.sakPOPUP.css({ display: "block", opacity: 0 }).animate({ opacity: 1 }, {
+                duration: 500, complete: () => {
+                    self.sakPOPUP.find('.sak-link.sak-esc, sak-link').first().trigger('focus');
+                }
+            });
+        } else {
+            self.sakPOPUP.animate({ opacity: 0 }, {
+                duration: 800, complete: () => {
+                    self.sakPOPUP.css({ display: "none" });
+                }
+            });
+        }
+    }
+}

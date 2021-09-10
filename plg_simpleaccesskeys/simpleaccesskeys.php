@@ -4,7 +4,7 @@
  * to the menu items to provide keyboard navigation
  *
  * @author Riccardo Zorn code@fasterjoomla.com
- * @copyright (C) 2018 https://www.fasterjoomla.com
+ * @copyright (C) 2018-2021 https://www.fasterjoomla.com
  * @license GNU/GPL v2 or greater http://www.gnu.org/licenses/gpl-2.0.html
  * @author Riccardo Zorn code@fasterjoomla.com
  */
@@ -88,6 +88,7 @@ class plgSystemSimpleAccessKeys extends JPlugin
 	 * @return boolean
 	 */
 	function isAllowed() {
+		error_log('isAllowed :::');
 	    if (JPATH_BASE == JPATH_ADMINISTRATOR) {
 	        return false;
 		}
@@ -116,6 +117,8 @@ class plgSystemSimpleAccessKeys extends JPlugin
 				}
 			}
 		}
+
+		error_log('isAllowed '. $result . '; '. $Itemid . ': '.json_encode($include_itemids). ': '.json_encode($exclude_itemids));
 		// if ($result) {error_log( "SimpleAccessKeys enabled");} else {error_log( "SimpleAccessKeys disabled");}
 		
 	    return $result;

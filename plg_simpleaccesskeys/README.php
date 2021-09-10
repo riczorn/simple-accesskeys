@@ -80,3 +80,10 @@ Version 1.5.3 (2021/08/20)
 	Compatibility with Joomla 3.10 and 4.0
 	Updated the Include / Exclude fields to menuitems.
 	
+Version 1.5.4 (2021/09/10)
+  Improved menuitem selection
+	Prevent action if Shift, Alt and / or Ctrl keys are pressed.
+
+Version 1.5.5 (2021/09/10)
+  Added ESC key support, pops open the legend and focuses on the first item
+	allowing further navigation with the Tab - Shift-tab keys
