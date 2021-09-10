@@ -94,48 +94,6 @@ SimpleAccessKeys.prototype.load = function () {
             };
         }
     });
-
-    /**
-  * AddRule snap-in
-  *!
-     * jquery.addrule.js 0.0.2 - https://gist.github.com/yckart/5563717/
-     * Add css-rules to an existing stylesheet.
-     *
-     * @see http://stackoverflow.com/a/16507264/1250044
-     *
-     * Copyright (c) 2013 Yannick Albert (http://yckart.com)
-     * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php).
-     * 2013/11/23
-     **/
-    let $ = jQuery || Zepto;
-
-    window.addRule = function (selector, styles, sheet) {
-
-        styles = (function (styles) {
-            if (typeof styles === "string") return styles;
-            var clone = "";
-            for (var prop in styles) {
-                if (styles.hasOwnProperty(prop)) {
-                    var val = styles[prop];
-                    prop = prop.replace(/([A-Z])/g, "-$1").toLowerCase(); // convert to dash-case
-                    clone += prop + ":" + (prop === "content" ? '"' + val + '"' : val) + "; ";
-                }
-            }
-            return clone;
-        }(styles));
-        sheet = sheet || document.styleSheets[document.styleSheets.length - 1];
-
-        if (sheet.insertRule) sheet.insertRule(selector + " {" + styles + "}", sheet.cssRules.length);
-        else if (sheet.addRule) sheet.addRule(selector, styles);
-
-        return this;
-
-    };
-
-    if ($) $.fn.addRule = function (styles, sheet) {
-        addRule(this.selector, styles, sheet);
-        return this;
-    };
 }
 
 /**
@@ -303,7 +261,7 @@ SimpleAccessKeys.prototype.showSAKPopup = function (self) {
         self.config.legendSubTitle,
         "</p><ul>");
 
-    popupText.push("<li><a href='#' class='sak-link sak-esc'><span class='key'>ESC</span>&nbsp;<span class='label'>Toggle Menu</span></a></li>");
+    popupText.push("<li><a href='#' class='sak-link sak-esc'><span class='key'>ESC</span>&nbsp;<span class='label'>" + self.config.legendMenu + "</span></a></li>");
     for (var i in self.config.urls) {
         var url = self.config.urls[i];
         var href = jQuery(url.item).attr("href");
@@ -321,8 +279,7 @@ SimpleAccessKeys.prototype.showSAKPopup = function (self) {
             //sakPOPUP.remove();
             self.toggleSAKPopup(self);
         }).appendTo(jQuery('body'));
-    jQuery('.sak-link:focus').addRule({ border: '1px solid red', "border-radius": "5px" });
-    jQuery('.sak-link').addRule({ padding: '2px 5px' });
+
     jQuery('.sak-link.sak-esc').click(() => { self.toggleSAKPopup(self); }).focus();
 };
 

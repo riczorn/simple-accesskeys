@@ -60,17 +60,20 @@ class plgSystemSimpleAccessKeys extends JPlugin
 		$accessKeysConfig->legendButtonText = JText::_("PLG_SYSTEM_SIMPLEACCESSKEYS_LEGEND_BUTTON_TEXT");
 		$accessKeysConfig->legendTitle = JText::_("PLG_SYSTEM_SIMPLEACCESSKEYS_LEGEND_TITLE");
 		$accessKeysConfig->legendSubTitle = JText::_("PLG_SYSTEM_SIMPLEACCESSKEYS_LEGEND_SUBTITLE");
+		$accessKeysConfig->legendMenu = JText::_("PLG_SYSTEM_SIMPLEACCESSKEYS_LEGEND_TOGGLEMENU");
 		$copyright = JText::_("PLG_SYSTEM_SIMPLEACCESSKEYS_LEGEND_COPYRIGHT");
 // 		if (stripos($copyright, 'fasterjoomla') ===FALSE ||
 // 		    strpos($copyright, 'https://www.fasterjoomla.com')===FALSE)
 		{
-		    $copyright = "Powered by <a href='https://www.fasterjoomla.com/extensions/simple-accesskeys-accessible-navigation' target='_blank'>Simple AccessKeys</a> &copy; 2018 <a href='https://www.fasterjoomla.com' target='_blank'>fasterjoomla</a>.";
+		    $copyright = "Powered by <a href='https://www.fasterjoomla.com/extensions/simple-accesskeys-accessible-navigation' target='_blank'>Simple AccessKeys</a> &copy; 2018-2021 <a href='https://www.fasterjoomla.com' target='_blank'>fasterjoomla</a>.";
 		}
 		if ($this->params->get('showcopyright','1')=='1') {
 		  $accessKeysConfig->copyright = "<div class='copyright'>$copyright</div>";
 		} else {
 		  $accessKeysConfig->copyright = "";
 		}
+
+
 		
 		
 		$document->addScriptDeclaration(sprintf('
@@ -88,8 +91,7 @@ class plgSystemSimpleAccessKeys extends JPlugin
 	 * @return boolean
 	 */
 	function isAllowed() {
-		error_log('isAllowed :::');
-	    if (JPATH_BASE == JPATH_ADMINISTRATOR) {
+		if (JPATH_BASE == JPATH_ADMINISTRATOR) {
 	        return false;
 		}
 		$include_itemids = $this->params->get('include_itemids');
@@ -118,10 +120,7 @@ class plgSystemSimpleAccessKeys extends JPlugin
 			}
 		}
 
-		error_log('isAllowed '. $result . '; '. $Itemid . ': '.json_encode($include_itemids). ': '.json_encode($exclude_itemids));
-		// if ($result) {error_log( "SimpleAccessKeys enabled");} else {error_log( "SimpleAccessKeys disabled");}
-		
-	    return $result;
+		return $result;
 	}
 	
 	/**

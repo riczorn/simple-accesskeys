@@ -13,6 +13,10 @@
   *  You can prevent loading this file in the 
   *  SimpleAccessKeys plugin configuration 
   */
+.accesskey {
+    text-shadow:2px 2px 2px orange, -2px -2px 2px orange;
+    font-weight:bold;
+}
 
 div.accessKeyPopup {
     background-color: rgba(255, 255, 255, 1);
@@ -77,3 +81,12 @@ div.accessKeyPopup ul span.label {
     top: 1rem;
     z-index: 10000;
 }
+
+div.accessKeyPopup  .sak-link:focus { 
+    border: 1px solid red;
+    border-radius: 5px 
+}
+
+div.accessKeyPopup  .sak-link { 
+    padding: 2px 5px;
+ }
